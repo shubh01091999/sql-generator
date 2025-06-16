@@ -127,7 +127,12 @@ if st.button("Generate"):
                 st.markdown("### ✅ Generated Output")
                 st.code(output, language="sql" if "SQL" in st.session_state.operation else "java")
                  # Show download button
-                ext = "sql" if "SQL" in st.session_state.operation else "java"
+                if st.session_state.operation == "Entity to SQL" or st.session_state.operation == "Explain SQL":
+                 ext = "sql"
+                elif st.session_state.operation == "SQL to Entity":
+                 ext = "java"
+                else:
+                 ext = "txt"             
                 st.download_button(
                 label="Download Output",
                 data=output,
